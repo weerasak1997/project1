@@ -42,8 +42,8 @@ namespace Game9
             IsMouseVisible = true;
             graphics.PreferredBackBufferWidth = 1920;
             graphics.PreferredBackBufferHeight = 1000;
-            graphics.IsFullScreen = true;
-            //Window.AllowUserResizing = true;
+            //graphics.IsFullScreen = true;
+            Window.AllowUserResizing = true;
             graphics.ApplyChanges();
 
             base.Initialize();

@@ -32,7 +32,7 @@ namespace Game9.States
             {
                 Position = new Vector2(1485, 209),
             };
-            retryStateButton.Click += RetryStateButton;
+            retryStateButton.Click += RetryStateButton_Click;
             var quitGameButton = new Button(buttonQuitMenuTexture, buttonFont)
             {
                 Position = new Vector2(940, 432),
@@ -59,7 +59,7 @@ namespace Game9.States
 
         }
 
-        private void RetryStateButton(object sender, EventArgs e)
+        private void RetryStateButton_Click(object sender, EventArgs e)
         {
             switch (MyGlobals.retry)
             {
@@ -68,8 +68,9 @@ namespace Game9.States
                 case 3: _game.ChangeState(new GameState3(_game, _graphicsDevice, _content)); break;
                 case 4: _game.ChangeState(new GameState4(_game, _graphicsDevice, _content)); break;
                 case 5: _game.ChangeState(new GameState5(_game, _graphicsDevice, _content)); break;
-                case 6: _game.ChangeState(new GameState6(_game, _graphicsDevice, _content)); break;
+                default: _game.ChangeState(new GameState6(_game, _graphicsDevice, _content)); break;
             }
+            MyGlobals.Over = "Begin";
         }
 
 

@@ -46,7 +46,7 @@ namespace Game9.Sprites
 
         public float speed = 2.5f;
         public Vector2 Velocity;
-
+        public Wall _wall;
 
         #endregion
 
@@ -65,23 +65,23 @@ namespace Game9.Sprites
         {
             if (Keyboard.GetState().IsKeyDown(Input.Up))
             {
-                Velocity.Y = -speed;
+                MyGlobals.Velocity.Y = -speed;
 
             }
 
             else if (Keyboard.GetState().IsKeyDown(Input.Down))
             {
-                Velocity.Y = speed;
+                MyGlobals.Velocity.Y = speed;
 
             }
             else if (Keyboard.GetState().IsKeyDown(Input.Left))
             {
-                Velocity.X = -speed;
+                MyGlobals.Velocity.X = -speed;
 
             }
             else if (Keyboard.GetState().IsKeyDown(Input.Right))
             {
-                Velocity.X = speed;
+                MyGlobals.Velocity.X = speed;
 
             }
         }
@@ -97,64 +97,24 @@ namespace Game9.Sprites
         }
         protected virtual void setAnimetion()
         {
-            if (Velocity.X > 0)
+            if (MyGlobals.Velocity.X > 0)
                 animetionManager.Play(_animetions["WalkRight"]);
-            else if (Velocity.X < 0)
+            else if (MyGlobals.Velocity.X < 0)
                 animetionManager.Play(_animetions["WalkLeft"]);
-            else if (Velocity.Y > 0)
+            else if (MyGlobals.Velocity.Y > 0)
                 animetionManager.Play(_animetions["WalkDown"]);
-            else if (Velocity.Y < 0)
+            else if (MyGlobals.Velocity.Y < 0)
                 animetionManager.Play(_animetions["WalkUp"]);
         }
-        public virtual void Update(GameTime gameTime, List<Sprite> sprites)
+        public virtual void Update(GameTime gameTime, List<Sprite> sprites, List<Wall> _wall)
         {
             Move();
             setAnimetion();
             animetionManager.Update(gameTime);
-            foreach (var sprite in sprites)
-            {
-                if (sprite == this)
-                    continue;
-                if (sprite.chacktype == "wall")
-                {
-                    if ((this.Velocity.X > 0 && this.IsTouchingleft(sprite)) ||
-                        (this.Velocity.X < 0 && this.IsTouchingRight(sprite)))
-                        this.Velocity.X = 0;
-                    if ((this.Velocity.Y > 0 && this.IsTouchingTop(sprite)) ||
-                       (this.Velocity.Y < 0 && this.IsTouchingBottom(sprite)))
-                        this.Velocity.Y = 0;
-                }
-                if (sprite.chacktype == "money")
-                {
-                    if ((this.Velocity.X > 0 && this.IsTouchingleft(sprite)) ||
-                         (this.Velocity.X < 0 && this.IsTouchingRight(sprite)))
-                    {
-                        this.Velocity.X = 0;
-                        if (Keyboard.GetState().IsKeyDown(Input.E))
-                        {
-                            Scores += 1000;
-                            sprite.isRemoved = true;
-                        }
-                    }
-
-                    if ((this.Velocity.Y > 0 && this.IsTouchingTop(sprite)) ||
-                       (this.Velocity.Y < 0 && this.IsTouchingBottom(sprite)))
-                    {
-                        this.Velocity.Y = 0;
-                        if (Keyboard.GetState().IsKeyDown(Input.E))
-                        {
-                            Scores += 1000;
-                            sprite.isRemoved = true;
-                        }
-
-                    }
-
-
-
-                }
-            }
-            Position += Velocity;
-            Velocity = Vector2.Zero;
+            foreach (var wall in _wall)
+            wall.Update(gameTime, sprites);
+            Position += MyGlobals.Velocity;
+            MyGlobals.Velocity = Vector2.Zero;
         
     }
         public Rectangle Rectangle

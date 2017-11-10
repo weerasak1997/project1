@@ -27,6 +27,7 @@ namespace Game9.States
         Vector2 positionScores = new Vector2(20, 30);
 
         public List<SecurityGuard> securityGuard;
+        public List<Wall> _wall;
 
         public SpriteBatch spriteBatch;
 
@@ -45,10 +46,9 @@ namespace Game9.States
             _font = this._content.Load<SpriteFont>("Fonts/FontScores");
             MoneyScores = this._content.Load<Texture2D>("Money/MoneyScores/MoneyScores");
 
-
-
-            // Screen = this._content.Load<Texture2D>("Screen/Screen2");
+            _currentState = new StateOver(_game, _graphicsDevice, _content);
             Screen = this._content.Load<Texture2D>("SecurityWay/SecurityWay2");
+            //Screen = this._content.Load<Texture2D>("Screen/Screen2");
             //player
             var animetion = new Dictionary<string, Animation>()
             {
@@ -68,64 +68,20 @@ namespace Game9.States
             };
             //
             // wall
-            var wall = new Dictionary<string, Animation>()
-            {
-                { "WalkUp", new Animation(_content.Load<Texture2D>("Screen/ScreenState2/1"), 1)},
-            };
-            var wall2 = new Dictionary<string, Animation>()
-            {
-                { "WalkUp", new Animation(_content.Load<Texture2D>("Screen/ScreenState2/2"), 1)},
-            };
-            var wall3 = new Dictionary<string, Animation>()
-            {
-                { "WalkUp", new Animation(_content.Load<Texture2D>("Screen/ScreenState2/3"), 1)},
-            };
-            var wall4 = new Dictionary<string, Animation>()
-            {
-                { "WalkUp", new Animation(_content.Load<Texture2D>("Screen/ScreenState2/4"), 1)},
-            };
-            var wall5 = new Dictionary<string, Animation>()
-            {
-                { "WalkUp", new Animation(_content.Load<Texture2D>("Screen/ScreenState2/5"), 1)},
-            };
-            var wall6 = new Dictionary<string, Animation>()
-            {
-                { "WalkUp", new Animation(_content.Load<Texture2D>("Screen/ScreenState2/6"), 1)},
-            };
-            var wall7 = new Dictionary<string, Animation>()
-            {
-                { "WalkUp", new Animation(_content.Load<Texture2D>("Screen/ScreenState2/7"), 1)},
-            };
-            var wall8 = new Dictionary<string, Animation>()
-            {
-                { "WalkUp", new Animation(_content.Load<Texture2D>("Screen/ScreenState2/8"), 1)},
-            };
-
-            var wall9 = new Dictionary<string, Animation>()
-            {
-                { "WalkUp", new Animation(_content.Load<Texture2D>("Screen/ScreenState2/9"), 1)},
-            };
-            var wall10 = new Dictionary<string, Animation>()
-            {
-                { "WalkUp", new Animation(_content.Load<Texture2D>("Screen/ScreenState2/10"), 1)},
-            };
-            var wall11 = new Dictionary<string, Animation>()
-            {
-                { "WalkUp", new Animation(_content.Load<Texture2D>("Screen/ScreenState2/11"), 1)},
-            };
-            var wall12 = new Dictionary<string, Animation>()
-            {
-                { "WalkUp", new Animation(_content.Load<Texture2D>("Screen/ScreenState2/12"), 1)},
-            };
-            var wall16 = new Dictionary<string, Animation>()
-            {
-                { "WalkUp", new Animation(_content.Load<Texture2D>("Screen/ScreenState2/16"), 1)},
-            };
-            var wall17 = new Dictionary<string, Animation>()
-            {
-                { "WalkUp", new Animation(_content.Load<Texture2D>("Screen/ScreenState2/17"), 1)},
-            };
-
+            var wall = this._content.Load<Texture2D>("Screen/ScreenState2/1");
+            var wall2 = this._content.Load<Texture2D>("Screen/ScreenState2/2");
+            var wall3 = this._content.Load<Texture2D>("Screen/ScreenState2/3");
+            var wall4 = this._content.Load<Texture2D>("Screen/ScreenState2/4");
+            var wall6 = this._content.Load<Texture2D>("Screen/ScreenState2/6");
+            var wall5 = this._content.Load<Texture2D>("Screen/ScreenState2/5");
+            var wall7 = this._content.Load<Texture2D>("Screen/ScreenState2/7");
+            var wall8 = this._content.Load<Texture2D>("Screen/ScreenState2/8");
+            var wall9 = this._content.Load<Texture2D>("Screen/ScreenState2/9");
+            var wall10 = this._content.Load<Texture2D>("Screen/ScreenState2/10");
+            var wall11 = this._content.Load<Texture2D>("Screen/ScreenState2/11");
+            var wall12 = this._content.Load<Texture2D>("Screen/ScreenState2/12");
+            var wall16 = this._content.Load<Texture2D>("Screen/ScreenState2/16");
+            var wall17 = this._content.Load<Texture2D>("Screen/ScreenState2/17");
             //
             //money
             var Money = new Dictionary<string, Animation>()
@@ -145,124 +101,11 @@ namespace Game9.States
                     },
                 },*/
                 //
-                //wall
-
-                new Sprite(wall)
-                {
-                    chacktype = "wall",
-                    Position = new Vector2(347,175),
-                    Input = new Input()
-                    {
-                    },
-                },
-                 new Sprite(wall2)
-                 {
-                     chacktype = "wall",
-                     Position = new Vector2(399, 172),
-                     Input = new Input()
-                     {
-                     },
-                 },
-                 new Sprite(wall3)
-                 {
-                     chacktype = "wall",
-                     Position = new Vector2(1637, 219),
-                     Input = new Input()
-                     {
-                     },
-                 },
-                 new Sprite(wall4)
-                 {
-                     chacktype = "wall",
-                     Position = new Vector2(502, 807),
-                     Input = new Input()
-                     {
-                     },
-                 },
-                new Sprite(wall5)
-                {
-                    chacktype = "wall",
-                    Position = new Vector2(498, 1000),
-                    Input = new Input()
-                    {
-                    },
-                },
-                new Sprite(wall6)
-                {
-                    chacktype = "wall",
-                    Position = new Vector2(399, 398),
-                    Input = new Input()
-                    {
-                    },
-                },
-            new Sprite(wall7)
-            {
-                chacktype = "wall",
-                Position = new Vector2(665,398),
-                Input = new Input()
-                {
-                },
-            },
-                 new Sprite(wall8)
-                 {
-                     chacktype = "wall",
-                     Position = new Vector2(706,215),
-                     Input = new Input()
-                     {
-                     },
-                 },
-                 new Sprite(wall9)
-                 {
-                     chacktype = "wall",
-                     Position = new Vector2(1174, 218),
-                     Input = new Input()
-                     {
-                     },
-                 },
-                 new Sprite(wall10)
-                 {
-                     chacktype = "wall",
-                     Position = new Vector2(916, 580),
-                     Input = new Input()
-                     {
-                     },
-                 },
-                 new Sprite(wall11)
-                 {
-                     chacktype = "wall",
-                     Position = new Vector2(812, 357),
-                     Input = new Input()
-                     {
-                     },
-                 },
-                 new Sprite(wall12)
-                 {
-                     chacktype = "wall",
-                     Position = new Vector2(400, 217),
-                     Input = new Input()
-                     {
-                     },
-                 },
-                 new Sprite(wall16)
-                 {
-                     chacktype = "wall",
-                     Position = new Vector2(1125, 540),
-                     Input = new Input()
-                     {
-                     },
-                 },
-                 new Sprite(wall17)
-                 {
-                     chacktype = "wall",
-                     Position = new Vector2(1227, 534),
-                     Input = new Input()
-                     {
-                     },
-                 },
-                 //
+               
                 new Sprite(animetion)
                 {
                 Position = new Vector2(420,900),
+
                 Input = new Input()
                 {
                     Up = Keys.W,
@@ -275,15 +118,151 @@ namespace Game9.States
                 
             };
 
+            _wall = new List<Wall>()
+            {
+                //wall
+
+                new Wall(wall)
+                {
+
+                    Position = new Vector2(347,175),
+
+                },
+                 new Wall(wall2)
+                 {
+
+                     Position = new Vector2(399, 172),
+
+                 },
+                 new Wall(wall3)
+                 {
+                     Position = new Vector2(1637, 219),
+
+                 },
+                 new Wall(wall4)
+                 {
+                     Position = new Vector2(502, 807),
+
+                 },
+                new Wall(wall5)
+                {
+                    Position = new Vector2(498, 1000),
+
+                },
+                new Wall(wall6)
+                {
+                    Position = new Vector2(399, 398),
+
+                },
+            new Wall(wall7)
+            {
+ 
+                Position = new Vector2(665,398),
+
+            },
+                 new Wall(wall8)
+                 {
+
+                     Position = new Vector2(706,215),
+
+                 },
+                 new Wall(wall9)
+                 {
+
+                     Position = new Vector2(1174, 218),
+
+                 },
+                 new Wall(wall10)
+                 {
+                     Position = new Vector2(916, 580),
+
+                 },
+                 new Wall(wall11)
+                 {
+                     Position = new Vector2(812, 357),
+                 },
+                 new Wall(wall12)
+                 {
+
+                     Position = new Vector2(400, 217),
+                 },
+                 new Wall(wall16)
+                 {
+
+                     Position = new Vector2(1125, 540),
+                 },
+                 new Wall(wall17)
+                 {
+                     Position = new Vector2(1227, 534),
+                 },
+                
+            };
+            //
+
             securityGuard = new List<SecurityGuard>()
             {
                 new SecurityGuard(animetionGuard)
                 {
-                Position = new Vector2(475, 500),
-                Speed = 0.2f,
+                Position = new Vector2(500, 500),
+                Speed = 2f,
                 chack = 1,
-                Farest = 850,
-                Smallest = 470,
+                Farest = 650,
+                Smallest = 410,
+
+                },
+                 new SecurityGuard(animetionGuard)
+                {
+                Position = new Vector2(420, 400),
+                Speed = 2f,
+                chack = 1,
+                Farest = 650,
+                Smallest = 401,
+
+                },
+                 new SecurityGuard(animetionGuard)
+                {
+                Position = new Vector2(1090, 400),
+                Speed = 2f,
+                chack = 1,
+                Farest = 1100,
+                Smallest = 750,
+
+                },
+                 new SecurityGuard(animetionGuard)
+                {
+                Position = new Vector2(1250, 400),
+                Speed = 2f,
+                chack = 1,
+                Farest = 1570,
+                Smallest = 1240,
+
+                },
+                 new SecurityGuard(animetionGuard)
+                {
+                Position = new Vector2(1100, 600),
+                Speed = 2f,
+                chack = 2,
+                Farest = 740,
+                Smallest = 590,
+
+                },
+                  new SecurityGuard(animetionGuard)
+                {
+                Position = new Vector2(700, 700),
+                Speed = 2f,
+                chack = 2,
+                Farest = 740,
+                Smallest = 590,
+
+                },
+                
+                  new SecurityGuard(animetionGuard)
+                {
+                Position = new Vector2(1450, 730),
+                Speed = 2f,
+                chack = 2,
+                Farest = 740,
+                Smallest = 590,
 
                 },
             };
@@ -335,7 +314,7 @@ namespace Game9.States
             spriteBatch.Draw(MoneyScores, MoneyScoresPosition, Color.White);
             foreach (var sprite in _sprites)
             {
-                spriteBatch.DrawString(_font, "         " + Convert.ToString(sprite.Scores), positionScores, Color.Green);
+                spriteBatch.DrawString(_font, "         " + Convert.ToString(MyGlobals.Scores), positionScores, Color.Green);
 
                 sprite.Draw(spriteBatch);
                 foreach (var securityGuards in securityGuard)
@@ -367,12 +346,13 @@ namespace Game9.States
 
         public override void Update(GameTime game)
         {
+            MyGlobals.retry = 2;
             foreach (var component in _component)
                 component.Update(game);
-            MyGlobals.retry = 2;
+            
             foreach (var sprite in _sprites)
             {
-                sprite.Update(game, _sprites);
+                sprite.Update(game, _sprites,_wall);
                 foreach(var securityGuards  in securityGuard)
                 securityGuards.Update(game, _sprites);
 

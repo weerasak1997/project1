@@ -52,8 +52,11 @@
     <Compile Include="MyGlobals.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Sprites\Dog.cs" />
+    <Compile Include="Sprites\Item.cs" />
     <Compile Include="Sprites\SecurityGuard.cs" />
     <Compile Include="Sprites\Sprite.cs" />
+    <Compile Include="Sprites\Wall.cs" />
     <Compile Include="States\Advise1.cs" />
     <Compile Include="States\Advise1_1.cs" />
     <Compile Include="States\GameState.cs" />
